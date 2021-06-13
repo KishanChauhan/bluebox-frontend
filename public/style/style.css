@@ -1,0 +1,464 @@
+*{
+    font-family: 'Poppins', sans-serif;
+}
+html,body{
+    overflow-x: hidden !important;
+}
+.fs-13{
+    font-size: 13px;
+}
+.topList{
+    list-style: none;
+}
+.hero .img-fluid.position-absolute {
+	right: 0;
+	top: 0;
+	width: 50%;
+}
+.hero{
+    padding: 200px 0;
+}
+.topBar{
+    z-index: 2;
+}
+.col-md-6.position-relative{
+    z-index: 2;
+}
+.logo.img-fluid {
+	width: 100px;
+}
+.nav-item{
+    margin: 0 5px;
+}
+.header {
+	position: fixed;
+	width: 100%;
+	z-index: 10;
+	top: 60px;
+}
+.header nav{
+    background-color: white;
+}
+.header nav {
+	background-color: white !important;
+	padding: 10px 30px !important;
+	border-radius: 10px;
+	box-shadow: 1px 1px 5px 5px rgba(0,0,0,0.2);
+}
+.columns .card {
+	height: 120px;
+}
+.columns .img-fluid:hover {
+	border: 2px solid #0069D9;
+	border-radius: 50%;
+	padding: 2px;
+}
+.columns.py-3 {
+	background-color: #E8F1F5;
+}
+.whyChooseUs{
+    padding: 35px 0;
+}
+.line {
+	height: 3px;
+	width: 200px;
+	background: #FCCB28;
+}
+.whyChooseUs {
+	background-image: url("../img/bg-choose.png");
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-position: bottom center;
+}
+.sliderSection .card {
+	border-radius: 0 20px 20px 0;
+}
+.sliderSection .col-md-7 {
+	position: absolute;
+	top: 50%;
+	right: 65px;
+	z-index: 1;
+	transform: translateY(-50%);
+}
+.sliderSection .col-md-7 .card {
+	border-radius: 20px;
+	margin: 10px;
+}
+.fs-14{
+    font-size: 14px;
+}
+.sliderSection .col-md-6 .card.bg-primary.pl-5 {
+	padding: 150px 0;
+}
+.btn.prevBtn.slick-arrow {
+	background: transparent;
+	border: 2px solid black;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	font-size: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	left: -59%;
+	bottom: 20%;
+}
+.btn.nextBtn.slick-arrow {
+	background: transparent;
+	border: 2px solid black;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	font-size: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	left: -53%;
+	bottom: 20%;
+}
+.we-deliver{
+    background-color: #E8F1F5;
+    padding: 35px 0;
+}
+.br-0{
+    border-radius: unset;
+}
+.fs-12{
+    font-size: 12px;
+}
+.form-control {
+	background: transparent;
+	border: unset;
+	border-bottom: 2px solid white;
+	border-radius: unset;
+}
+::placeholder{
+    color: white !important;
+}
+.form-control:focus{
+    outline: unset !important;
+    box-shadow: unset !important;
+    border-bottom: 2px solid #0069D9 !important;
+}
+.form-control:focus::placeholder{
+    color: black !important;
+}
+.contact {
+	background-color: #14212A;
+	padding: 30px 0;
+	border-bottom: 2px solid white;
+}
+.footer {
+	background-color: #14212A;
+	padding: 50px 0;
+}
+.contact .col-3.m-auto i {
+	background: #2B71FF;
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.form-control.bg-white::placeholder{
+    color: black !important;
+}
+
+.header-float{
+        position: fixed;
+        left: 0;
+        width: 100%;
+        top: 0;
+        border-radius: unset !important;
+}
+
+
+/* move box page */
+.move-hero{
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../img/move-hero.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.better{
+	background-color: #E8F1F5;
+}
+.cards span.bg-primary{
+	border-radius: 5px;
+	font-size: 14px;
+}
+.cards .card{
+	background-color: #E8F1F5;
+	border-radius: unset;
+	box-shadow: 1px 1px 5px 5px rgba(0,0,0,0.1);
+}
+.movingSafely{
+	background-color: #E8F1F5;
+}
+iframe {
+	width: 100%;
+	height: 100%;
+}
+
+
+.img-hover-zoom {
+	height: unset; /* [1.1] Set it as per your need */
+	overflow: hidden; /* [1.2] Hide the overflowing of child elements */
+  }
+  
+  /* [2] Transition property for smooth transformation of images */
+  .img-hover-zoom img {
+	transition: transform .5s ease;
+  }
+  
+  /* [3] Finally, transforming the image when container gets hovered */
+  .img-hover-zoom:hover img {
+	transform: scale(1.2);
+  }
+
+
+  /* box package */
+  .tabsSection .card {
+	background: unset;
+	border: unset;
+	padding: 15px 0;
+	font-size: 14px;
+}
+.tabsSection{
+	background-color: #EFEFEF;
+}
+.card.active {
+	background: white;
+	height: 150px;
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	border-radius: unset;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.number {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	border: 1px solid grey;
+	margin: auto;
+}
+.card.active .number {
+	border-color: #0055FE;
+}
+.card.active p {
+	font-weight: 700;
+}
+.showTabs{
+	background-color: #EFEFEF;
+}
+.pagination .btn.btn-outline-primary.fs-14.p-1 {
+	border-color: black;
+	border-radius: unset;
+	width: 15%;
+	color: black;
+}
+.pagination .btn.btn-outline-primary.fs-14.p-1:hover{
+	color: white !important;
+}
+.pagination .btn.btn-outline-primary.fs-14.p-1.active{
+	background-color: #0055FE;
+	color: white !important;
+} 
+.top.fs-14 {
+	vertical-align: top;
+}
+.bottom.fs-14 {
+	vertical-align: bottom;
+}
+.showTabs .card{
+	border-radius: unset;
+}
+.showTabs .card-header{
+	border-radius: unset;
+}
+.showTabs .card-body{
+	border-radius: unset;
+}
+.showTabs .card-footer{
+	border-radius: unset;
+}
+.btn.btn-danger.mt-3 {
+	border-radius: unset;
+	font-size: 15px;
+}
+.showTabs button{
+	border-radius: unset;
+}
+.showTabs .card{
+	transition: 0.4s;
+}
+.bg-info, .btn-info{
+	background-color: #39B5FF !important;
+	border-color: #39B5FF !important;
+}
+.bg-success, .btn-success{
+	background-color: #40BC86 !important;
+	border-color: #40BC86 !important;
+}
+.showTabs .card:hover {
+	transform: scale(1.1);
+	position: relative;
+	z-index: 1;
+	box-shadow: 1px 1px 5px 0 rgba(0,0,0,0.4);
+}
+button:focus{
+	outline: unset !important;
+	box-shadow: unset !important;
+}
+.step1{
+	width: 100% !important;
+}
+.step2, .step3, .step4{
+	width: 100%;
+	display: none;
+}
+.v-middle{
+	vertical-align: middle;
+}
+.numberInput {
+	width: 30px;
+	border: unset;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+.noCard:hover{
+	transform: unset !important;
+}
+td.fs-12 {
+	position: relative;
+	top: -3px;
+}
+.active .number{
+	font-weight: 700 !important;
+}
+@media screen and (max-width:1200px){
+	.btn.nextBtn.slick-arrow {
+		left: -50%;
+	}
+}
+@media screen and (max-width:992px){
+	.hero {
+		padding: 150px 0;
+	}
+	.btns.mt-4.col-md-9 {
+		max-width: 85%;
+	}
+	.columns .card {
+		height: 140px;
+	}
+	.whyChooseUs {
+		background-size: 150%;
+	}
+	.showTabs .col-lg-3.aos-init.aos-animate {
+		padding: 0;
+		margin-top: 20px;
+	}
+}
+
+@media screen and (max-width:768px){
+	.hero.position-relative {
+		background: rgba(0,0,0,0.7);
+		color: white;
+	}
+	.hero.move-hero.position-relative {
+		background: unset;
+		background-image: url("../img/move-hero.png") !important;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+	.whyChooseUs .col-md-6.m-auto {
+		margin-top: 20px !important;
+	}
+	.sliderSection .col-md-7 {
+		position: unset;
+		transform: unset !important
+	}
+	.btn.prevBtn.slick-arrow {
+		display: none;
+	}
+	.btn.nextBtn.slick-arrow {
+		display: none;
+	}
+	.sliderSection .col-md-6 .card.bg-primary.pl-5 {
+		padding: 0;
+		border-radius: unset;
+	}
+	.contact .col-md-4 {
+		margin: 10px 0;
+	}
+	.topBar.bg-primary.py-2.position-relative {
+		text-align: center !important;
+	}
+	.topBar .text-right {
+		text-align: center !important;
+	}
+	iframe{
+		height: unset !important;
+	}
+	.st1 p {
+		display: none;
+	}
+	.st2 p {
+		display: none;
+	}
+	.st3 p {
+		display: none;
+	}
+	.st4 p {
+		display: none;
+	}
+	.card.active {
+		height: 90px;
+	}
+	.showTabs .col-lg-9.p-0 {
+		padding: 0 10px !important;
+	}
+	.showTabs .col-lg-3 {
+		padding: 0 10px !important;
+	}
+}
+@media screen and (max-width:576px){
+	.we-deliver {
+		padding: 30px 15px;
+	}
+	.hero h1.mb-0.font-weight-bold {
+		font-size: 25px;
+	}
+	.hero {
+		padding: 150px 0 50px 0;
+	}
+	.pagination .btn {
+		font-size: 10px;
+	}
+}

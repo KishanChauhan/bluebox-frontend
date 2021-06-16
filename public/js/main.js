@@ -1,4 +1,5 @@
-// AOS.init();
+
+AOS.init();
 
 // $('.slider').slick({
 //     dots: true,
@@ -41,14 +42,14 @@
 //   });
 
 
-//   $(window).scroll(function(){
-//     if($(window).scrollTop() > 150){
-//       $("nav").addClass('header-float')
-//     }
-//     else{
-//         $("nav").removeClass('header-float')
-//     }
-//   })
+  $(window).scroll(function(){
+    if($(window).scrollTop() > 150){
+      $("nav").addClass('header-float')
+    }
+    else{
+        $("nav").removeClass('header-float')
+    }
+  })
 
   $('.step1Btn').click(function(){
     $('.step1').hide(400)

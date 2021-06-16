@@ -51,7 +51,7 @@ export default function Header() {
                     <a className="nav-link text-dark" href="http://localhost:3000/">Pricing</a>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link text-dark" href="http://localhost:3000/">Moving Boxes</a>
+                    <a className="nav-link text-dark" href="/moving-box">Moving Boxes</a>
                   </li>
                   <li className="nav-item">
                       <a className="nav-link text-dark" href="http://localhost:3000/">Moving Supplies</a>
@@ -63,7 +63,7 @@ export default function Header() {
                       <a className="nav-link text-dark" href="http://localhost:3000/">FAQ</a>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link text-white py-1 btn btn-dark" href="http://localhost:3000/">Order Now</a>
+                      <a className="nav-link text-white py-1 btn btn-dark" href="/box-packges">Order Now</a>
                     </li>
                 </ul>
                 

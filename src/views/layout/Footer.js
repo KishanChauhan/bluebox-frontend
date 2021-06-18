@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
+import { saveNewsLetter } from "../../data/API";
+import { useToasts } from "react-toast-notifications";
 
 export default function Footer() {
-  const onChange = (e) => {(
-    console.log(e)
-  )}
+  const { addToast } = useToasts();
+  const [email_address, setEmail] = useState();
+  const newsLetterSubmit = (e) => {
+    e.preventDefault();
+    let obj = { email: email_address };
+    saveNewsLetter(obj)
+      .then((res) => {
+        addToast("Request Recived Successfully. We will get back to you soon.Thanks!", {
+          appearance: "success",
+          autoDismiss: true,
+        });
+      })
+      .catch((e) => {
+        addToast("Some error occure,please try again", {
+          appearance: "error",
+          autoDismiss: true,
+        });
+      });
+  };
+
   return (
     <>
       {/* <!-- contact --> */}
@@ -65,7 +84,10 @@ export default function Footer() {
                       <p className="mb-0 fs-13 font-weight-bold text-white">
                         Email:
                       </p>
-                      <a href="mailto:info@zeppgo.com" className="text-white fs-13">
+                      <a
+                        href="mailto:info@zeppgo.com"
+                        className="text-white fs-13"
+                      >
                         info@zeppgo.com
                       </a>
                     </div>
@@ -216,20 +238,20 @@ export default function Footer() {
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit{" "}
               </p>
 
-              <form action="">
+              <form>
                 <input
-                  type="text"
+                  type="email"
                   className="form-control fs-12 bg-white"
-                  placeholder="EMAIL ADRESS"
-                  name=""
-                  onChange={onChange}
+                  placeholder="Email"
+                  name="email_address"
+                  value={email_address}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
                 <input
                   type="submit"
                   value="Submit"
                   className="btn btn-primary br-0 mt-2 fs-12 w-100"
-                  name=""
-                  onChange={onChange}
+                  onClick={(e) => newsLetterSubmit(e)}
                 />
               </form>
             </div>

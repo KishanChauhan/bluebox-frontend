@@ -22,3 +22,7 @@ export async function getLocations(){
 export async function saveQuote(data){ 
     return await instance.post(`/store/quote/`, data);    
 }
+
+export async function saveNewsLetter(data){ 
+    return await instance.post(`/store/news-letter/`, data);    
+}

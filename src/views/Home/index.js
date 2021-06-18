@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import SimpleReactValidator from "simple-react-validator";
 // import { Link, useHistory, useParams } from 'react-router-dom';
+
 import {
   getHomeData,
   getTestimonials,
@@ -8,24 +10,59 @@ import {
   getLocations,
   saveQuote,
 } from "../../data/API";
-import { notification,message } from "antd";
 
+import { useToasts } from "react-toast-notifications";
 
 import SimpleSlider from "./slider";
 
 export default function Home() {
+  const [, forceUpdate] = useState();
+  const validator = useRef(
+    new SimpleReactValidator()
+  );
+
   const [home, setHomeData] = useState();
   const [testimonials, setTestimonials] = useState([]);
   const [why_us, setWhyUs] = useState([]);
   const [contact_info, setContactInfo] = useState([]);
   const [locations, setLocation] = useState([]);
 
+  const { addToast } = useToasts();
   // Free Quote Request states
-  const [full_name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
-  const [delivery_date, setDeliveryDate] = useState("");
+
+  const [values, setValues] = React.useState({
+    full_name: "",
+    email: "",
+    phone: "",
+    address: "",
+    delivery_date: "",
+  });
+  const handleChange = (event) => {
+    setValues({ ...values, [event.target.name]: event.target.value });
+  };
+
+  const handleQuoteSubmit = (e) => {
+    e.preventDefault();
+    if (validator.current.allValid()) {
+      saveQuote(values)
+        .then((res) => {
+          addToast("Saved Successfully", {
+            appearance: "success",
+            autoDismiss: true,
+          });
+        })
+        .catch((e) => {
+          addToast("Some error occure,please try again", {
+            appearance: "error",
+            autoDismiss: true,
+          });
+        });
+    } else {
+      validator.current.showMessages();
+      forceUpdate(1);
+    }
+  };
+
   const callApi = () => {
     getHomeData()
       .then((res) => {
@@ -62,24 +99,6 @@ export default function Home() {
     callApi();
   }, []);
 
-  const handleQuoteSubmit = (evt) => {
-    evt.preventDefault();
-    let obj = {
-      full_name: full_name,
-      email: email,
-      address: address,
-      phone: phone,
-      delivery_date:delivery_date
-    };
-
-    saveQuote(obj)
-      .then((res) => {
-        message.info("Quote submitted successfully.")
-      })
-      .catch((e) => {
-        message.error("Quote not submitted.")
-      });
-  };
   return (
     <>
       <section className="hero position-relative">
@@ -505,63 +524,92 @@ export default function Home() {
                     Request a
                   </p>
                   <h3 className="text-white">Free Quote</h3>
-                  <form action="" className="mt-4">
+                  <form className="mt-4">
                     <div className="row">
                       <div className="col-12 p-1">
                         <input
                           type="text"
-                          required
-                          className="form-control fs-12 my-1"
+                          className="form-control fs-12 my-1 bg-white"
                           placeholder="Full Name"
                           name="full_name"
-                          value={full_name}
-                          onChange={(e) => setName(e.target.value)}
+                          value={values.full_name}
+                          onChange={(e) => handleChange(e)}
                         />
+                        {validator.current.message(
+                          "full_name",
+                          values.full_name,
+                          "required|alpha",
+                          { className: "text-danger" }
+                        )}
                       </div>
                       <div className="col-12 p-1">
                         <input
                           type="email"
-                          className="form-control fs-12 my-1"
+                          className="form-control fs-12 my-1 bg-white"
                           placeholder="Email Address"
                           name="email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
+                          value={values.email}
+                          onChange={(e) => handleChange(e)}
                         />
+                        {validator.current.message(
+                          "email",
+                          values.email,
+                          "required|email",
+                          { className: "text-danger" }
+                        )}
                       </div>
                       <div className="col-12 p-1">
                         <input
                           type="text"
-                          className="form-control fs-12 my-1"
+                          className="form-control fs-12 my-1 bg-white"
                           placeholder="Phone Number"
                           name="phone"
-                          value={phone}
-                          onChange={(e) => setPhone(e.target.value)}
+                          value={values.phone}
+                          onChange={(e) => handleChange(e)}
                         />
+                        {validator.current.message(
+                          "phone",
+                          values.phone,
+                          "required|numeric",
+                          { className: "text-danger" }
+                        )}
                       </div>
                       <div className="col-lg-6 p-1">
                         <input
                           type="text"
-                          className="form-control fs-12 my-1"
+                          className="form-control fs-12 my-1 bg-white"
                           placeholder="Where Do You Live"
                           name="address"
-                          value={address}
-                          onChange={(e) => setAddress(e.target.value)}
+                          value={values.address}
+                          onChange={(e) => handleChange(e)}
                         />
+                        {validator.current.message(
+                          "address",
+                          values.address,
+                          "required",
+                          { className: "text-danger" }
+                        )}
                       </div>
                       <div className="col-lg-6 p-1">
                         <input
-                          type="text"
-                          className="form-control fs-12 my-1"
+                          type="date"
+                          className="form-control fs-12 my-1 bg-white"
                           placeholder="Delivery Date"
                           name="delivery_date"
-                          value={delivery_date}
-                          onChange={(e) => setDeliveryDate(e.target.value)}
-                          
+                          value={values.delivery_date}
+                          onChange={(e) => handleChange(e)}
                         />
+                        {validator.current.message(
+                          "delivery_date",
+                          values.delivery_date,
+                          "required",
+                          { className: "text-danger" }
+                        )}
                       </div>
                       <div className="col-12 p-1">
                         <button
                           className="btn btn-primary br-0 d-block w-100 text-dark mt-3 font-weight-bold"
+                          type="submit"
                           onClick={(e) => handleQuoteSubmit(e)}
                         >
                           GET QUOTE

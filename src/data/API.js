@@ -26,3 +26,12 @@ export async function saveQuote(data){
 export async function saveNewsLetter(data){ 
     return await instance.post(`/store/news-letter/`, data);    
 }
+
+export async function rentalsPeriods(){ 
+    return await instance.get(`/store/rentals/`);    
+}
+
+// get box packages product
+export async function getBoxPackages(category,sub_cate,rental){ 
+    return await instance.get(`/store/products/${category}/${sub_cate}/${rental}/`);    
+}

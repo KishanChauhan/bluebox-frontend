@@ -1,6 +1,6 @@
 
 AOS.init();
-
+// import $ from jQuery;
 // $('.slider').slick({
 //     dots: true,
 //     infinite: true,
@@ -41,6 +41,7 @@ AOS.init();
 //     ]
 //   });
 
+      
 
   $(window).scroll(function(){
     if($(window).scrollTop() > 150){

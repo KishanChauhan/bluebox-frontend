@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import SimpleReactValidator from "simple-react-validator";
-// import { Link, useHistory, useParams } from 'react-router-dom';
-
+import { useHistory } from "react-router-dom";
+import ZipCode from "./ZipModal";
 import {
   getHomeData,
   getTestimonials,
@@ -17,15 +17,14 @@ import SimpleSlider from "./slider";
 
 export default function Home() {
   const [, forceUpdate] = useState();
-  const validator = useRef(
-    new SimpleReactValidator()
-  );
+  const validator = useRef(new SimpleReactValidator());
 
   const [home, setHomeData] = useState();
   const [testimonials, setTestimonials] = useState([]);
   const [why_us, setWhyUs] = useState([]);
   const [contact_info, setContactInfo] = useState([]);
   const [locations, setLocation] = useState([]);
+  const history = useHistory();
 
   const { addToast } = useToasts();
   // Free Quote Request states
@@ -37,6 +36,7 @@ export default function Home() {
     address: "",
     delivery_date: "",
   });
+
   const handleChange = (event) => {
     setValues({ ...values, [event.target.name]: event.target.value });
   };
@@ -98,16 +98,25 @@ export default function Home() {
   useEffect(() => {
     callApi();
   }, []);
+  const [modalShow, setModalShow] = React.useState(false);
 
+  const hideZipModal = () => {
+    setModalShow(false);
+  };
+
+  const showZipModal = () => {
+    setModalShow(true);
+  };
   return (
     <>
+      {/* <!-- hero --> */}
       <section className="hero position-relative">
         <img
-          src={"img/help.png"}
+          src="img/help.png"
           className="img-fluid position-absolute"
           data-aos="zoom-in"
           data-aos-duration="1500"
-          alt=""
+          alt="somethinghelping Men"
         />
         <div className="container">
           <div className="row">
@@ -118,32 +127,24 @@ export default function Home() {
                 data-aos-delay="500"
                 data-aos-duration="1000"
               >
-                Forget Cardboard. <br></br>
-                We Rent <span className="text-primary">Awesome </span> <br></br>
-                Moving Boxes in the <br></br>
-                <span className="text-primary">San Francisco</span> Bay Area{" "}
-                <br></br>
+                We rent eco-friendly, reusable
+                <span className="text-primary"> Moving Boxes </span>Delivered to
+                your
+                <span className="text-primary"> Home or office</span>
               </h1>
               <div className="btns mt-4 col-md-9">
                 <div className="row">
                   <div className="col-6 px-2">
                     <button
-                      className="btn btn-primary w-100 d-block"
-                      data-aos="fade-up"
-                      data-aos-delay="700"
-                      data-aos-duration="1000"
-                    >
-                      RESIDENTIAL
-                    </button>
-                  </div>
-                  <div className="col-6 px-2">
-                    <button
                       className="btn btn-dark w-100 d-block"
+                      // data-toggle="modal"
+                      // data-target="#zipModal"
                       data-aos="fade-up"
                       data-aos-delay="800"
                       data-aos-duration="1000"
+                      onClick={() => showZipModal()}
                     >
-                      OFFICE
+                      ORDER NOW
                     </button>
                   </div>
                 </div>
@@ -153,109 +154,139 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* order process boxes */}
-      <section className="columns py-3">
-        <div className="container-fluid">
-          <div className="row">
-            <div
-              className="col-md-3 px-1"
-              data-aos="fade-left"
-              data-aos-delay="0"
-              data-aos-duration="1000"
-            >
-              <div className="card">
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-3 m-auto">
-                      <img src={"img/order.png"} className="img-fluid" alt="" />
-                    </div>
-                    <div className="col-9 pl-0">
-                      <p className="fs-13 font-weight-bold mb-0">You order</p>
-                      <p className="fs-13 mb-0">
-                        Order one of our moving box packages. Prices start from
-                        just $109
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+      {/* <!-- hero --> */}
+      {/* <!-- Modal --> */}
+      <ZipCode showModal={modalShow} hideModal={hideZipModal} />
+      {/* <div
+        className="modal fade"
+        id="zipModal"
+        tabIndex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                <img src="img/icon-truck.png" className="img-fluid" alt="" />
+                Where are you moving?
+              </h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-
-            <div
-              className="col-md-3 px-1"
-              data-aos="fade-left"
-              data-aos-delay="200"
-              data-aos-duration="1000"
-            >
-              <div className="card">
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-3 m-auto">
-                      <img src="img/drop.png" className="img-fluid" alt="" />
-                    </div>
-                    <div className="col-9 pl-0">
-                      <p className="fs-13 font-weight-bold mb-0">We drop off</p>
-                      <p className="fs-13 mb-0">
-                        We'll deliver our plastic moving boxes to you with free
-                        delivery
-                      </p>
-                    </div>
-                  </div>
+            <div className="modal-body">
+              <div className="row">
+                <div className="col-md-6 p-2">
+                  Zipcode of your current address?
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter Zipcode"
+                    name="pickup_zipcode"
+                    value={values.pickup_zipcode}
+                    onChange={(e) => handleChange(e)}
+                  />
                 </div>
-              </div>
-            </div>
-
-            <div
-              className="col-md-3 px-1"
-              data-aos="fade-left"
-              data-aos-delay="400"
-              data-aos-duration="1000"
-            >
-              <div className="card">
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-3 m-auto">
-                      <img src="img/move.png" className="img-fluid" alt="" />
-                    </div>
-                    <div className="col-9 pl-0">
-                      <p className="fs-13 font-weight-bold mb-0">You move</p>
-                      <p className="fs-13 mb-0">
-                        Pack the boxes, hire a mover and move into your new home
-                        or office
-                      </p>
-                    </div>
-                  </div>
+                <div className="col-md-6 p-2">
+                  Zipcode of your new address?
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Enter Zipcode"
+                    name="delivery_zipcode"
+                    value={values.delivery_zipcode}
+                    onChange={(e) => handleChange(e)}
+                  />
                 </div>
-              </div>
-            </div>
-
-            <div
-              className="col-md-3 px-1"
-              data-aos="fade-left"
-              data-aos-delay="600"
-              data-aos-duration="1000"
-            >
-              <div className="card">
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-3 m-auto">
-                      <img src="img/pick.png" className="img-fluid" alt="" />
-                    </div>
-                    <div className="col-9 pl-0">
-                      <p className="fs-13 font-weight-bold mb-0">We pick up</p>
-                      <p className="fs-13 mb-0">
-                        When you're done unpacking, we'll pick up the boxes
-                      </p>
-                    </div>
-                  </div>
+                <div className="col-12 text-right">
+                  <a
+                    href="box-package.html"
+                    className="mt-4 btn btn-primary"
+                    onClick={(e) => zipCode(e)}
+                  >
+                    Continue
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div> */}
+      {/* <!-- modal --> */}
+      {/* <!-- columns --> */}
+      <section className="columns py-3">
+        <div className="container-fluid">
+          <div className="row">
+            <div
+              className="col-md-3 p-0 py-2"
+              data-aos="fade-right"
+              data-aos-delay="0"
+              data-aos-duration="1000"
+            >
+              <p className="ml-5 fw-700 text-uppercase">
+                Order <span className="text-primary">Moving Boxes</span>
+              </p>
+              <img
+                src="img/1.png"
+                className="oneImg img-fluid"
+                alt="something"
+              />
+            </div>
+            <div
+              className="col-md-3 p-0 py-2"
+              data-aos="fade-right"
+              data-aos-delay="300"
+              data-aos-duration="1000"
+            >
+              <p className="ml-5 fw-700 text-uppercase">
+                We <span className="text-primary">Deiver Boxes</span>
+              </p>
+              <img
+                src="img/2.png"
+                className="twoImg img-fluid"
+                alt="something"
+              />
+            </div>
+            <div
+              className="col-md-3 p-0 py-2"
+              data-aos="fade-right"
+              data-aos-delay="600"
+              data-aos-duration="1000"
+            >
+              <p className="ml-5 fw-700 text-uppercase">
+                You <span className="text-primary">Pack & Move</span>
+              </p>
+              <img
+                src="img/3.png"
+                className="threeImg img-fluid"
+                alt="something"
+              />
+            </div>
+            <div
+              className="col-md-3 p-0 py-2"
+              data-aos="fade-right"
+              data-aos-delay="900"
+              data-aos-duration="1000"
+            >
+              <p className="ml-5 fw-700 text-uppercase">
+                We <span className="text-primary">Pick up Boxes</span>
+              </p>
+              <img
+                src="img/4.png"
+                className="fourImg img-fluid"
+                alt="something"
+              />
+            </div>
+          </div>
+        </div>
       </section>
-      {/* order process boxes ends here */}
+      {/* <!-- columns --> */}
       {/* <!-- why choos us --> */}
       <section className="whyChooseUs">
         <div className="container">
@@ -429,15 +460,15 @@ export default function Home() {
 
       {/* <!-- beats cardboard box --> */}
       <section className="cardboardBox">
-        <div className="container">
+        <div className="container-fluid">
           <div className="text-center">
             <img
-              src="img/beats.png"
+              src="img/Graphic2.jpg"
               className="img-fluid"
+              alt="somethingbeatBox"
               data-aos="fade-up"
               data-aos-delay="0"
               data-aos-duration="1000"
-              alt=""
             />
           </div>
         </div>
@@ -486,6 +517,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
       {/* <!-- slider Section --> */}
 
       {/* <!-- we deliver to this area --> */}
@@ -512,6 +544,7 @@ export default function Home() {
                 })}
               </div>
             </div>
+            {/* Quote form */}
             <div
               className="col-md-4 m-auto"
               data-aos="fade-left"
@@ -529,7 +562,7 @@ export default function Home() {
                       <div className="col-12 p-1">
                         <input
                           type="text"
-                          className="form-control fs-12 my-1 bg-white"
+                          className="form-control fs-12 my-1"
                           placeholder="Full Name"
                           name="full_name"
                           value={values.full_name}
@@ -545,7 +578,7 @@ export default function Home() {
                       <div className="col-12 p-1">
                         <input
                           type="email"
-                          className="form-control fs-12 my-1 bg-white"
+                          className="form-control fs-12 my-1"
                           placeholder="Email Address"
                           name="email"
                           value={values.email}
@@ -561,7 +594,7 @@ export default function Home() {
                       <div className="col-12 p-1">
                         <input
                           type="text"
-                          className="form-control fs-12 my-1 bg-white"
+                          className="form-control fs-12 my-1"
                           placeholder="Phone Number"
                           name="phone"
                           value={values.phone}
@@ -577,7 +610,7 @@ export default function Home() {
                       <div className="col-lg-6 p-1">
                         <input
                           type="text"
-                          className="form-control fs-12 my-1 bg-white"
+                          className="form-control fs-12 my-1"
                           placeholder="Where Do You Live"
                           name="address"
                           value={values.address}
@@ -593,7 +626,7 @@ export default function Home() {
                       <div className="col-lg-6 p-1">
                         <input
                           type="date"
-                          className="form-control fs-12 my-1 bg-white"
+                          className="form-control fs-12 my-1"
                           placeholder="Delivery Date"
                           name="delivery_date"
                           value={values.delivery_date}

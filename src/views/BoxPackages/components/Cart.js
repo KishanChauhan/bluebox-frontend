@@ -27,7 +27,8 @@ function dec4() {
   document.getElementById("inpNum4").stepDown();
 }
 export default function Cart(props) {
-  const { box } = props;
+  const { box, packing } = props;
+  console.log("----packing------", packing);
   return (
     <>
       <div

@@ -6,6 +6,7 @@ import Step4 from "./Step4";
 import Cart from "./Cart";
 export default function MasterForm() {
   const [box, setBox] = React.useState({});
+  const [packing, setPacking] = React.useState({});
   return (
     <>
       <section className="showTabs pb-5">
@@ -13,11 +14,11 @@ export default function MasterForm() {
           <div className="row">
             <div className="col-lg-9 bg-white p-0">
               <Step1 setBox={setBox} />
-              <Step2 />
+              <Step2 setPacking={setPacking} />
               <Step3 />
               <Step4 />
             </div>
-            <Cart box={box} />
+            <Cart box={box} packing={packing} />
           </div>
         </div>
       </section>

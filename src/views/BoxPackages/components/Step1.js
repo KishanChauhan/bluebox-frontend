@@ -13,6 +13,7 @@ export default function Step1(props) {
   const [select_rental, setSelectedRental] = useState("Week 2");
   const [category, setCategory] = useState("Home");
   const [sub_category, setSubCate] = useState("Box Packges");
+  const [is_selected, setSelect] = useState(false);
   const [products, setProducts] = useState([]);
 
   const getRentals = () => {
@@ -34,11 +35,17 @@ export default function Step1(props) {
     getRentals();
     getBoxProducts();
   }, []);
+
   const selectRentals = (e, rental) => {
     setSelectedRental(rental);
     getBoxProducts(rental);
   };
-  console.log("products", products);
+
+  const handlePackageClick = (obj) => {
+    setSelect(true);
+    props.setBox(obj);
+  };
+
   return (
     <>
       <div className="step1" id="step1">
@@ -104,7 +111,7 @@ export default function Step1(props) {
                                 id={obj.id}
                                 name="radio"
                                 value="ADD PACKAGE"
-                                onClick={() => props.setBox(obj)}
+                                onClick={() => handlePackageClick(obj)}
                               />
                               <label htmlFor={obj.id}>ADD PACKAGE</label>
                             </div>
@@ -123,6 +130,7 @@ export default function Step1(props) {
               <button
                 className="btn btn-dark text-uppercase step1Btn"
                 onClick={step1Btn}
+                disabled={is_selected ? false : true}
               >
                 Next Step
               </button>

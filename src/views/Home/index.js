@@ -98,14 +98,14 @@ export default function Home() {
   useEffect(() => {
     callApi();
   }, []);
-  const [modalShow, setModalShow] = React.useState(false);
+  const [showM, setModal] = React.useState(false);
 
-  const hideZipModal = () => {
-    setModalShow(false);
+  const hideZModal = () => {
+    setModal(false);
   };
 
-  const showZipModal = () => {
-    setModalShow(true);
+  const showZModal = () => {
+    setModal(true);
   };
   return (
     <>
@@ -142,7 +142,7 @@ export default function Home() {
                       data-aos="fade-up"
                       data-aos-delay="800"
                       data-aos-duration="1000"
-                      onClick={() => showZipModal()}
+                      onClick={() => showZModal()}
                     >
                       ORDER NOW
                     </button>
@@ -156,7 +156,7 @@ export default function Home() {
       </section>
       {/* <!-- hero --> */}
       {/* <!-- Modal --> */}
-      <ZipCode showModal={modalShow} hideModal={hideZipModal} />
+      <ZipCode showModal={showM} hideModal={hideZModal} />
       {/* <div
         className="modal fade"
         id="zipModal"

@@ -22,6 +22,22 @@ export default function Step2(props) {
     React.useState("Packing Supplies");
   const [packing_products, setPackingProducts] = React.useState([]);
 
+  function containsObject(obj, list) {
+    return list.some((elem) => elem === obj);
+  }
+  // handle click event of the button to add item
+  const addMoreItem = (newItem, typ) => {
+    if (typ === "packing") {
+      if (!containsObject(newItem, props.packings)) {
+        props.setPacking((prevItems) => [...prevItems, newItem]);
+      }
+    } else {
+      if (!containsObject(newItem, props.movings)) {
+        props.setMovings((prevItems) => [...prevItems, newItem]);
+      }
+    }
+  };
+
   const callAPI = () => {
     getSelectMovings(category, sub_category)
       .then((res) => {
@@ -78,9 +94,9 @@ export default function Step2(props) {
                             </ul>
                             <button
                               className="btn btn-danger mt-3"
-                              onClick={() => props.setPacking(moving)}
+                              onClick={() => addMoreItem(moving, "moving")}
                             >
-                              ADD PACKAGE
+                              +ADD
                             </button>
                           </div>
                         </div>
@@ -118,8 +134,11 @@ export default function Step2(props) {
                                 ></div>
                               </ul>
                             </ul>
-                            <button className="btn btn-danger mt-3">
-                              ADD PACKAGE
+                            <button
+                              className="btn btn-danger mt-3"
+                              onClick={() => addMoreItem(packing, "packing")}
+                            >
+                              +ADD
                             </button>
                           </div>
                         </div>

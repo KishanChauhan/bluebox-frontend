@@ -26,9 +26,21 @@ function inc4() {
 function dec4() {
   document.getElementById("inpNum4").stepDown();
 }
+const changePackge = () => {
+  document.getElementById("step2").style.display = "none";
+  document.getElementById("step3").style.display = "none";
+  document.getElementById("step4").style.display = "none";
+  document.getElementById("step1").style.display = "block";
+  
+  document.getElementById("st2").classList.remove("active");
+  document.getElementById("st3").classList.remove("active");
+  document.getElementById("st4").classList.remove("active");
+
+  document.getElementById("st1").classList.add("active");
+};
 export default function Cart(props) {
-  const { box, packing } = props;
-  console.log("----packing------", packing);
+  const { box, packing_products, moving_products } = props;
+
   return (
     <>
       <div
@@ -51,7 +63,10 @@ export default function Cart(props) {
                         <p className="fs-12 font-weight-bold m-0">Package</p>
                       </td>
                       <td>
-                        <p className="fs-12 font-weight-bold m-0 text-right text-primary">
+                        <p
+                          className="fs-12 font-weight-bold m-0 text-right text-primary change-package-p"
+                          onClick={changePackge}
+                        >
                           Change
                         </p>
                       </td>
@@ -79,62 +94,42 @@ export default function Cart(props) {
                         </p>
                       </td>
                     </tr>
-                    <tr>
-                      <td className="fs-12">
-                        <button className="btn p-0" onClick={dec1}>
-                          <span className="v-middle text-primary text-12">
-                            -
-                          </span>
-                        </button>
-                        <input
-                          type="number"
-                          className="numberInput text-center text-12"
-                          value="1"
-                          name=""
-                          id="inpNum1"
-                          readOnly
-                        />
-                        <button className="btn p-0" onClick={inc1}>
-                          <span className="v-middle text-primary text-12">
-                            +
-                          </span>
-                        </button>
-                      </td>
-                      <td className="v-middle m-auto">
-                        <p className="fs-12 m-0">Bubble Wrap</p>
-                      </td>
-                      <td>
-                        <p className="fs-12 m-0 text-right">$52</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="fs-12">
-                        <button className="btn p-0" onClick={dec2}>
-                          <span className="v-middle text-primary text-12">
-                            -
-                          </span>
-                        </button>
-                        <input
-                          type="number"
-                          className="numberInput text-center text-12"
-                          value="1"
-                          name=""
-                          id="inpNum2"
-                          readOnly
-                        />
-                        <button className="btn p-0" onClick={inc2}>
-                          <span className="v-middle text-primary text-12">
-                            +
-                          </span>
-                        </button>
-                      </td>
-                      <td className="v-middle m-auto">
-                        <p className="fs-12 m-0">pouches</p>
-                      </td>
-                      <td>
-                        <p className="fs-12 m-0 text-right">$52</p>
-                      </td>
-                    </tr>
+                    {packing_products &&
+                      packing_products.map((item) => {
+                        return (
+                          <tr>
+                            <td className="fs-12">
+                              <button className="btn p-0" onClick={dec1}>
+                                <span className="v-middle text-primary">
+                                  -
+                                  {/* <i class="fa fa-trash" aria-hidden="true"></i> */}
+                                </span>
+                              </button>
+                              <input
+                                type="number"
+                                className="numberInput text-center text-12"
+                                value="1"
+                                name=""
+                                id="inpNum1"
+                                readOnly
+                              />
+                              <button className="btn p-0" onClick={inc1}>
+                                <span className="v-middle text-primary text-12">
+                                  +
+                                </span>
+                              </button>
+                            </td>
+                            <td className="v-middle m-auto">
+                              <p className="fs-12 m-0">{item.title}</p>
+                            </td>
+                            <td>
+                              <p className="fs-12 m-0 text-right">
+                                ${item.price}
+                              </p>
+                            </td>
+                          </tr>
+                        );
+                      })}
                   </tbody>
                 </table>
               </li>
@@ -148,62 +143,41 @@ export default function Cart(props) {
                         </p>
                       </td>
                     </tr>
-                    <tr>
-                      <td className="fs-12">
-                        <button className="btn p-0" onClick={dec3}>
-                          <span className="v-middle text-primary text-12">
-                            -
-                          </span>
-                        </button>
-                        <input
-                          type="number"
-                          className="numberInput text-center text-12"
-                          value="1"
-                          name=""
-                          id="inpNum3"
-                          readOnly
-                        />
-                        <button className="btn p-0" onClick={inc3}>
-                          <span className="v-middle text-primary text-12">
-                            +
-                          </span>
-                        </button>
-                      </td>
-                      <td className="v-middle m-auto">
-                        <p className="fs-12 m-0">glass divider</p>
-                      </td>
-                      <td>
-                        <p className="fs-12 m-0 text-right">$52</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="fs-12">
-                        <button className="btn p-0" onClick={dec4}>
-                          <span className="v-middle text-primary text-12">
-                            -
-                          </span>
-                        </button>
-                        <input
-                          type="number"
-                          className="numberInput text-center text-12"
-                          value="1"
-                          name=""
-                          id="inpNum4"
-                          readOnly
-                        />
-                        <button className="btn p-0" onClick={inc4}>
-                          <span className="v-middle text-primary text-12">
-                            +
-                          </span>
-                        </button>
-                      </td>
-                      <td className="v-middle m-auto">
-                        <p className="fs-12 m-0">wardrobe box</p>
-                      </td>
-                      <td>
-                        <p className="fs-12 m-0 text-right">$52</p>
-                      </td>
-                    </tr>
+                    {moving_products &&
+                      moving_products.map((item) => {
+                        return (
+                          <tr>
+                            <td className="fs-12">
+                              <button className="btn p-0" onClick={dec3}>
+                                <span className="v-middle text-primary text-12">
+                                  -
+                                </span>
+                              </button>
+                              <input
+                                type="number"
+                                className="numberInput text-center text-12"
+                                value="1"
+                                name=""
+                                id="inpNum3"
+                                readOnly
+                              />
+                              <button className="btn p-0" onClick={inc3}>
+                                <span className="v-middle text-primary text-12">
+                                  +
+                                </span>
+                              </button>
+                            </td>
+                            <td className="v-middle m-auto">
+                              <p className="fs-12 m-0">{item.title}</p>
+                            </td>
+                            <td>
+                              <p className="fs-12 m-0 text-right">
+                                ${item.price}
+                              </p>
+                            </td>
+                          </tr>
+                        );
+                      })}
                   </tbody>
                 </table>
               </li>

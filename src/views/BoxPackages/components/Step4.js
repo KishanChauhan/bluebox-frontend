@@ -2,17 +2,11 @@ import React from "react";
 import SimpleReactValidator from "simple-react-validator";
 import PaymentApp from "../../payment";
 
-function step4BackBtn() {
-  document.getElementById("step4").style.display = "none";
-  document.getElementById("step3").style.display = "block";
-  document.getElementById("st4").classList.remove("active");
-  document.getElementById("st3").classList.add("active");
-}
-
-export default function Step4() {
+export default function Step4(props) {
   const [, forceUpdate] = React.useState();
   const validator = React.useRef(new SimpleReactValidator());
 
+  const { delivery_detail, pickup_detail } = props;
   const [personal, setPersonalDetails] = React.useState({
     first_name: "",
     last_name: "",
@@ -23,13 +17,6 @@ export default function Step4() {
     voucher_code: "",
     hdyfu: "",
   });
-  // const [payment, setPayment] = React.useState({
-  //   name_of_card: "",
-  //   card_number: "",
-  //   month: "",
-  //   year: "",
-  //   security_code: "",
-  // });
 
   const handleChange = (event) => {
     setPersonalDetails({
@@ -37,6 +24,7 @@ export default function Step4() {
       [event.target.name]: event.target.value,
     });
   };
+
   return (
     <>
       <div className="step4" id="step4">
@@ -179,104 +167,11 @@ export default function Step4() {
 
               <h5>Enter Payment Details</h5>
               <hr />
-              {/* <div className="row"> */}
-                <PaymentApp />
-                {/* <div className="col-md-6 mt-3">
-                    <label>Name on card *</label>
-                    <input
-                      className="form-control"
-                      name="name_of_card"
-                      value={payment.name_of_card}
-                      onChange={(e) => handleChange(e)}
-                    />
-                    {validator.current.message(
-                      "Name",
-                      payment.name_of_card,
-                      "required",
-                      { className: "text-danger" }
-                    )}
-                  </div>
-                  <div className="col-md-6 mt-3">
-                    <label>Card Number *</label>
-                    <input
-                      className="form-control"
-                      name="card_number"
-                      value={payment.card_number}
-                      onChange={(e) => handleChange(e)}
-                    />
-                    {validator.current.message(
-                      "Card Number",
-                      personal.card_number,
-                      "required",
-                      { className: "text-danger" }
-                    )}
-                  </div>
-                  <div className="col-md-6 mt-3">
-                    <div className="row">
-                      <div className="col-md-3">
-                        <label>Month*</label>
-
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Month"
-                          name="month"
-                          value={payment.month}
-                          onChange={(e) => handleChange(e)}
-                        />
-                      </div>
-                      <div className="col-md-3">
-                        <label>Year *</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Year"
-                          name="year"
-                          value={payment.year}
-                          onChange={(e) => handleChange(e)}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-6 mt-3">
-                    <label>Security Code</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Security Code"
-                      name="security_code"
-                      value={payment.security_code}
-                      onChange={(e) => handleChange(e)}
-                    />
-
-                    {validator.current.message(
-                      "Security Code",
-                      payment.security_code,
-                      "required",
-                      { className: "text-danger" }
-                    )}
-                  </div> */}
-              {/* </div> */}
-            </div>
-
-            <div className="row">
-              <div className="col-6">
-                <div className="text-left mt-4">
-                  <button
-                    className="btn btn-dark text-uppercase step4BackBtn"
-                    onClick={step4BackBtn}
-                  >
-                    Previous Step
-                  </button>
-                </div>
-              </div>
-              <div className="col-6">
-                <div className="text-right mt-4">
-                  <button className="btn btn-dark text-uppercase step4Btn">
-                    Submit
-                  </button>
-                </div>
-              </div>
+              <PaymentApp
+                delivery_detail={delivery_detail}
+                pickup_detail={pickup_detail}
+                personal={personal}
+              />
             </div>
           </div>
         </div>

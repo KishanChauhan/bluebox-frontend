@@ -19,35 +19,15 @@ function step3BackBtn() {
   document.getElementById("st3").classList.remove("active");
   document.getElementById("st2").classList.add("active");
 }
-export default function Step3() {
+export default function Step3(props) {
   const [, forceUpdate] = React.useState();
   const validator = React.useRef(new SimpleReactValidator());
   const [rentals, setRentalList] = React.useState([]);
   const [windows, setWindows] = React.useState([]);
   const [extra_work, setExtraWork] = React.useState([]);
 
-  const [delivery, setDelivery] = React.useState({
-    delivery_address: "",
-    delivery_date: null,
-    latitude: "",
-    longitude: "",
-    apt_number: "",
-    description: "",
-    delivery_window: "",
-    extra_work: "",
-    rental: "",
-  });
-  const [pickup, setPickup] = React.useState({
-    pickup_address: "",
-    pickup_date: null,
-    latitude: "",
-    longitude: "",
-    apt_number: "",
-    description: "",
-    delivery_window: "",
-    extra_work: "",
-    rental: "",
-  });
+  const { delivery, pickup, setDelivery, setPickup } = props;
+
   const handleChange = (event) => {
     setDelivery({ ...delivery, [event.target.name]: event.target.value });
   };
@@ -265,7 +245,7 @@ export default function Step3() {
                 </div>
               </div>
 
-              <br></br> 
+              <br></br>
               <h5>Pickup Details</h5>
               <hr />
               <div className="row">
@@ -425,13 +405,6 @@ export default function Step3() {
                     value={pickup.description}
                     onChange={(e) => handleChange(e)}
                   ></textarea>
-
-                  {validator.current.message(
-                    "address",
-                    pickup.address,
-                    "required",
-                    { className: "text-danger" }
-                  )}
                 </div>
               </div>
             </form>

@@ -15,6 +15,7 @@ export default function Step1(props) {
   const [sub_category, setSubCate] = useState("Box Packges");
   const [is_selected, setSelect] = useState(false);
   const [products, setProducts] = useState([]);
+  const [selected, setSelected] = useState();
 
   const getRentals = () => {
     rentalsPeriods()
@@ -44,6 +45,7 @@ export default function Step1(props) {
   const handlePackageClick = (obj) => {
     setSelect(true);
     props.setBox(obj);
+    setSelected(obj?.id);
   };
 
   return (
@@ -112,8 +114,14 @@ export default function Step1(props) {
                                 name="radio"
                                 value="ADD PACKAGE"
                                 onClick={() => handlePackageClick(obj)}
+                                style={{ display: "none" }}
                               />
-                              <label htmlFor={obj.id}>ADD PACKAGE</label>
+                              <label
+                                className="btn btn-danger mt-3"
+                                htmlFor={obj.id}
+                              >
+                                {selected === obj.id ? "SELECTED" : "ADD PACKAGE"}
+                              </label>
                             </div>
                             {/* <button  type="radio" className="btn btn-success mt-3">
                         ADD PACKAGE

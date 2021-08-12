@@ -65,7 +65,9 @@ const Field = ({
 
 const SubmitButton = ({ processing, error, children, disabled }) => (
   <button
-    className={`SubmitButton ${error ? "SubmitButton--error" : ""}`}
+    className={`btn btn-dark text-uppercase step4Btn SubmitButton ${
+      error ? "SubmitButton--error" : ""
+    }`}
     type="submit"
     disabled={processing || disabled}
   >
@@ -112,7 +114,7 @@ const CardField = ({ onChange, error }) => (
   </div>
 );
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ delivery_detail, pickup_detail, personal }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState(null);
@@ -163,7 +165,16 @@ const CheckoutForm = () => {
       setError(payload.error);
     } else {
       console.log("paymentMethodpaymentMethod-", payload.paymentMethod);
-      placeOrder(payload.paymentMethod)
+      console.log("devlery", delivery_detail);
+      console.log("pickup", pickup_detail);
+      console.log("personal", personal);
+      let data = {
+        delivery: delivery_detail,
+        pickup: pickup_detail,
+        personal: personal,
+        payment: payload.paymentMethod,
+      };
+      placeOrder(data)
         .then((res) => {
           if (res?.data?.success) {
             console.log("back from request:-", res);
@@ -175,7 +186,7 @@ const CheckoutForm = () => {
           console.log("order place error:-", e);
         });
 
-      // setPaymentMethod(payload.paymentMethod);
+      setPaymentMethod(payload.paymentMethod);
     }
   };
 
@@ -249,9 +260,28 @@ const CheckoutForm = () => {
           }}
           error={error}
         />
-        <SubmitButton processing={processing} error={error} disabled={!stripe}>
-          Pay $25
-        </SubmitButton>
+
+        <div className="col-6">
+          <div className="text-left mt-4">
+            <button
+              className="btn btn-dark text-uppercase step4BackBtn"
+              onClick={step4BackBtn}
+            >
+              Previous Step
+            </button>
+          </div>
+        </div>
+        <div className="col-6">
+          <div className="text-right mt-4">
+            <SubmitButton
+              processing={processing}
+              error={error}
+              disabled={!stripe}
+            >
+              Submit
+            </SubmitButton>
+          </div>
+        </div>
       </div>
     </form>
   );
@@ -271,13 +301,26 @@ const stripePromise = loadStripe(
   "pk_test_51IkuRHSFxk7wZre14cswJOfrKp5cov3k6H3Uh7EiGgMuAjC2B9g6os6erOmFhPhFDgTNtpGAocXXES0Ake5cot4G00qd863WXT"
 );
 
-const PaymentApp = () => {
+function step4BackBtn() {
+  document.getElementById("step4").style.display = "none";
+  document.getElementById("step3").style.display = "block";
+  document.getElementById("st4").classList.remove("active");
+  document.getElementById("st3").classList.add("active");
+}
+
+const PaymentApp = ({ delivery_detail, pickup_detail, personal }) => {
   return (
-    <div className="AppWrapper">
-      <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
-        <CheckoutForm />
-      </Elements>
-    </div>
+    <>
+      <div className="AppWrapper">
+        <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
+          <CheckoutForm
+            delivery_detail={delivery_detail}
+            pickup_detail={pickup_detail}
+            personal={personal}
+          />
+        </Elements>
+      </div>
+    </>
   );
 };
 

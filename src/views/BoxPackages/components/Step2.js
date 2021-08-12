@@ -23,7 +23,7 @@ export default function Step2(props) {
   const [packing_products, setPackingProducts] = React.useState([]);
 
   function containsObject(obj, list) {
-    return list.some((elem) => elem === obj);
+    return list?.some((elem) => elem === obj);
   }
   // handle click event of the button to add item
   const addMoreItem = (newItem, typ) => {

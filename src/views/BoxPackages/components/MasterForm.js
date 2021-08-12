@@ -9,6 +9,28 @@ export default function MasterForm() {
   const [packings, setPacking] = React.useState([]);
   const [movings, setMovings] = React.useState([]);
 
+  const [delivery, setDelivery] = React.useState({
+    delivery_address: "",
+    delivery_date: null,
+    latitude: "",
+    longitude: "",
+    apt_number: "",
+    description: "",
+    delivery_window: "",
+    extra_work: "",
+    rental: "",
+  });
+  const [pickup, setPickup] = React.useState({
+    pickup_address: "",
+    pickup_date: null,
+    latitude: "",
+    longitude: "",
+    apt_number: "",
+    description: "",
+    delivery_window: "",
+    extra_work: "",
+    rental: "",
+  });
   return (
     <>
       <section className="showTabs pb-5">
@@ -22,8 +44,13 @@ export default function MasterForm() {
                 movings={movings}
                 packings={packings}
               />
-              <Step3 />
-              <Step4 />
+              <Step3
+                delivery={delivery}
+                pickup={pickup}
+                setDelivery={setDelivery}
+                setPickup={setPickup}
+              />
+              <Step4 delivery_detail={delivery} pickup_detail={pickup} />
             </div>
             <Cart
               box={box}

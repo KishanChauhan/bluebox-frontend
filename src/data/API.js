@@ -56,8 +56,5 @@ export async function getExtraWork() {
 }
 
 export async function placeOrder(data) {
-  return await instance.post(`/order/save-stripe-info/`, {
-    email: data?.billing_details?.email,
-    payment_id: data.id,
-  });
+  return await instance.post(`/order/save-stripe-info/`, data);
 }
